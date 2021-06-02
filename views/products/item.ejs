@@ -1,0 +1,103 @@
+<%- include('../partials/header')%>
+<link rel="stylesheet" type="" href="/css/star.css">
+<%- include('../partials/navbar')%>
+
+<%- include('../partials/flash')%>
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-lg-7 mb-5">
+            <img src="<%=prod.img%>" class="card-img-top mb-3 px-5" alt="...">
+            <%if(currentUser){%>
+            <%if(currentUser.usertype === 'seller'){%>
+            <div class="px-5">
+                <a href="/products/<%=prod._id%>/edit" class="card-title btn-sm btn btn-warning"><strong>Edit</strong> </a>
+                <form method="POST" action="/products/<%=prod._id%>?_method=DELETE" class="d-inline">
+                    <button class="card-title btn-sm btn btn-danger"><strong> Delete</strong></button>    
+                </form>                
+            </div>
+            <%}}%>
+            
+        </div>
+        <div class="col-lg-5">
+            <div class="card mb-5">
+            <div class="card-body">
+                <p class="display-6"><strong><%=prod.title%></strong></p>
+                <p class="card-text" style="color:grey;"><%=prod.subtitle%></p>
+                <p class="border d-inline p-1" style="color:grey"><i class="fas fa-quote-left"></i> <%=prod.reviews.length%> Reviews</p>
+                <h6  class="mt-3"> &#8377; <%=prod.price%></h6>
+                <p style="color:#ff6392;"><b>inclusive of all taxes</b> </p>
+                
+                <form class="d-inline" method="POST" action="/user/<%=prod._id%>/cart">
+                    <button class="card-title btn-sm btn btn-secondary"><strong><i class="fas fa-cart-arrow-down"></i> Add to Cart</strong></button>    
+                </form>
+                
+                <a href="" class="card-title btn-sm btn btn-success"><strong><i class="far fa-credit-card"></i> Buy</strong></a>
+                <p class="card-text"><b>Best Offers:</b></p>
+                <p class="card-text"><%=prod.offers%></p>
+                <p class="card-text"><b>Product Details:</b> </p>
+                <p class="card-text"><%=prod.desc%></p>                
+            </div>
+            </div>
+            <div class="p-4">
+                <h4 class="mb-4">Add Reviews</h4>
+                <form method="POST" action="/products/<%=prod._id%>/review" class="validation" novalidate>
+                    <!--<div class="mb-3">
+                        <input type="range" name="ratings" class="form-range" min="1" max="5" step="1" id="rating" required>
+                    </div>-->
+
+                    
+                    <fieldset class="starability-basic">      
+                        <input type="radio" id="no-rate" class="input-no-rate" name="ratings" value="0" checked aria-label="No rating." />
+
+                        <input type="radio" id="rate1" name="ratings" value="1" />
+                        <label for="rate1">1 star.</label>
+
+                        <input type="radio" id="rate2" name="ratings" value="2" />
+                        <label for="rate2">2 stars.</label>
+
+                        <input type="radio" id="rate3" name="ratings" value="3" />
+                        <label for="rate3">3 stars.</label>
+
+                        <input type="radio" id="rate4" name="ratings" value="4" />
+                        <label for="rate4">4 stars.</label>
+
+                        <input type="radio" id="rate5" name="ratings" value="5" />
+                        <label for="rate5">5 stars.</label>
+
+                        <span class="starability-focus-ring"></span>
+                    </fieldset>
+  
+
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment:</label>
+                        <input type="text" class="form-control" name="comment" id="comment" required>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                </form>
+            </div>
+            <div  class="p-4">
+            <%if(prod.reviews){%>
+                <%for(let x of prod.reviews){%>
+                <div class="card mb-2">
+                    <h6 class="card-header text-capitalize"><%=x.user%></h6>
+                    <div class="card-body">
+                        <!--<h5 class="card-title">Ratings: <%=x.ratings%> </h5>-->
+                        <p class="starability-result" data-rating="<%=x.ratings%>">
+                            Rated: <%=x.ratings%> stars
+                        </p>
+                        <p class="card-text"><%=x.comment%></p>
+                        
+                        <form  method="POST" action="/products/<%=prod._id%>/review/<%=x._id%>?_method=DELETE">
+                            <button class="btn btn-sm btn-danger">Remove</button>    
+                        </form>
+                        
+                    </div>
+                </div>
+                <%}}%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer')%>

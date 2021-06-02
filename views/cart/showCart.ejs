@@ -1,0 +1,65 @@
+<%- include('../partials/header')%>
+<%- include('../partials/navbar')%>
+
+<%- include('../partials/flash')%>
+
+<%let total=0%>
+
+<h1 class="text-center mt-5">My Cart</h1>
+<div class="container mt-2 mb-5 pt-5">
+    <div class="row">
+
+        <div class="col-lg-7 mb-5">
+            <%for(let x of userCart){%>
+            <div class="card mb-3 mx-2" style="max-width: 700px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="<%=x.img%>" style="max-width: 200px;" class="p-4" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=x.title%></h5>
+                        <p class="card-text"><small class="text-muted"><%=x.subtitle%></small></p>
+                        <p class="card-text"><%=x.desc.substr(0, 150)%>...</p>
+                        <p class="card-text">&#8377; <%=x.price%></p>
+                        
+                        <form method="POST" action="/user/<%=currentUser._id%>/cart/<%=x._id%>?_method=DELETE">
+                            <button class="btn btn-sm btn-secondary">Remove</button>
+                        </form>
+
+
+                        <%total += x.price%>
+                    </div>
+                    </div>
+                </div>                
+            </div>
+            <%}%>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card mx-5" style="width: 18rem; opacity:0.75;">
+                <div class="card-header">
+                    <b>PRICE DETAILS (<%=userCart.length%> items)</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Total MRP - &#8377; <%=total%></li>
+                    <li class="list-group-item">Convenience Fee - &#8377; 40</li>
+                </ul>
+            </div>
+            <div class="mx-5 mt-4" style="width: 18rem;">
+                <div class="row" style="opacity:0.85;">
+                    <div class="col-lg-8">
+                        <strong>Total Amount </strong>
+                    </div>
+                    <div class="col-lg-4">
+                        <strong>&#8377; <%=total+40%></strong>
+                    </div>
+                </div>
+                <button style="background-color: #ff6392; color:#fff;" class="btn mt-2 w-100">PLACE ORDER </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer')%>

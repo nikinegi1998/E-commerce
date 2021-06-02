@@ -1,0 +1,80 @@
+<%- include('../partials/header')%>
+<%- include('../partials/navbar')%>
+
+<div class="container mt-5 mb-5 w-50">
+    <div class="row">
+        <div class=" text-center border p-5">
+            <h2 class="mt-2 mb-4">Edit Product</h2>
+            <form method="POST" action="/products/<%=prod._id%>/edit?_method=PATCH" class="validation mb-3" novalidate>
+                <div class="mb-4 row">
+                <label for="title" class="col-sm-2 col-form-label">Title:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" value="<%=prod.title%>" name="title" id="title" required>
+                </div>
+                </div>
+
+                <div class="mb-4 row">
+                <label for="subtitle" class="col-sm-2 col-form-label">Subtitle:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="subtitle" value="<%=prod.subtitle%>" id="subtitle" required>
+                </div>
+                </div>
+
+                <div class="mb-4 row">
+                <label for="img" class="col-sm-2 col-form-label">Image url:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="img" value="<%=prod.img%>" id="img" required>
+                </div>
+                </div>
+
+                <div class="mb-4 row">
+                <label for="category" class="col-sm-2 col-form-label">Category:</label>
+                <div class="col-sm-10">
+                    <select class="form-select form-select-sm" name="category" aria-label=".form-select-sm example">
+                        <%if(prod.category==="Men"){%>
+                            <option value="Men" selected>Men</option>
+                            <option value="Women">Women</option>
+                            <option value="Kids">Kids</option>
+                        <%} else if(prod.category==="Women"){%>
+                            <option value="Men">Men</option>
+                            <option value="Women"  selected>Women</option>
+                            <option value="Kids">Kids</option>
+                        <%} else{%>
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                            <option value="Kids"  selected>Kids</option>
+                        <%}%>                        
+                    </select>
+                </div>
+                </div>
+
+                <div class="mb-4 row">
+                <label for="price" class="col-sm-2 col-form-label">Price:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="price" value="<%=prod.price%>" id="price" required>
+                </div>
+                </div>
+                
+                <div class="mb-4 row">
+                <label for="offers" class="col-sm-2 col-form-label">Offers:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="offers" value="<%=prod.offers%>" id="offers" required>
+                </div>
+                </div>
+                
+                <div class="mb-4 row">
+                <label for="desc" class="col-sm-2 col-form-label">Description:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="desc" value="<%=prod.desc%>" id="desc" required>
+                </div>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+            
+        </div>        
+    </div>
+    
+</div>
+
+
+<%- include('../partials/footer')%>

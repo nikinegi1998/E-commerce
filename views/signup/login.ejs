@@ -1,0 +1,35 @@
+<%- include('../partials/header')%>
+<%- include('../partials/navbar')%>
+
+<%- include("../partials/flash")%>
+<div class="container mt-5 mb-5 w-50">
+    
+    <div class="row">
+        <div class=" text-center border p-5">
+
+            <h2 class="mt-2 mb-4">Login</h2>
+
+            <form method="POST" action="/login" class="validation mb-3" novalidate>
+                <div class="mb-4 row">
+                <label for="username" class="col-sm-2 col-form-label">Username:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" id="user" required>
+                </div>
+                </div>
+                <div class="mb-4 row">
+                <label for="password" class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+                </div>
+                <button class="btn btn-success">LogIn</button>
+            </form>
+            
+            <a href="/register">New User? SignUp</a>
+
+        </div>        
+    </div>    
+</div>
+
+
+<%- include('../partials/footer')%>
