@@ -5,6 +5,15 @@ const Review = require('../model/reviews')
 const {isLoggedIn} = require('../middleware')
 
 // Show all the products
+router.get('/', async(req, res)=>{
+    try{
+        const prod = await Products.find({});
+        res.render('products/show', {prod});
+    }
+    catch(e){
+        res.redirect('/error')
+    }
+})
 router.get('/products', async(req, res)=>{
     try{
         const prod = await Products.find({});
