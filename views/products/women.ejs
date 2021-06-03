@@ -2,15 +2,14 @@
 
 <%- include('../partials/navbar')%>
 
-
 <div class="container mt-5 pt-5">
     <div class="row">
         <% for(let x of prod){ 
             if(x.category === "Women"){%>
 
         <div class="col-lg-3 mycards mb-5">
-            <div class="card">
-            <img src="<%=x.img%>" class="card-img-top" alt="...">
+            <div class="card" style="height: 30rem;">
+            <img src="<%=x.img%>" style="height: 70%;" class="card-img-top" alt="...">
             <div class="card-body">
                 <a href="/products/<%=x._id%>" class="card-title" style="color:#ff6392; text-decoration:none"><strong><%=x.title%></strong></a>
                 <p class="card-text" style="color:grey;"><%=x.subtitle%></p>
