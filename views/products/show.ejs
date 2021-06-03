@@ -2,7 +2,7 @@
 <%- include('../partials/navbar')%>
 <%- include('../partials/flash')%>
 
-
+<%prod.sort((a, b)=> 0.5 - Math.random());%>
 <div class="container mt-5 pt-5">
     <div class="row">
         <% for(let x of prod){ %>
