@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 // Requiring the modules
 const express = require('express');
 const app = express();
@@ -27,7 +31,7 @@ app.use(methodOverride('_method'));
 
 
 // Connect Db
-mongoose.connect('mongodb://localhost:27017/shoppingApp', 
+mongoose.connect(process.env.DB_URL, 
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -82,4 +86,4 @@ app.get('*', (req, res)=>{
     res.render('error');
 })
 
-app.listen(3000, ()=>console.log("Server connected at port 3000"))
+app.listen(process.env.PORT || 3000, ()=>console.log("Server connected at port 3000"))
